@@ -1,0 +1,55 @@
+[package]
+name = "harsark"
+version = "0.3.5"
+authors = ["kanishkarj <kanishkarj@hotmail.com>"]
+edition = "2018"
+license-file = "LICENSE.md"
+categories = ["embedded", "no-std", "concurrency"]
+keywords = ["arm", "cortex-m"]
+readme = "README.md"
+description = "Safe and lightweight real-time Kernel."
+repository = "https://github.com/Autonomous-Cyber-Physical-Systems/harsark.rs"
+
+[build-dependencies]
+cc = "1.0.28"
+
+[dependencies]
+cortex-m-semihosting = "0.3.2"
+cortex-m = {version="0.6.3", features=["inline-asm","const-fn"]}
+cortex-m-rt = "0.6.12"
+alloc-cortex-m = { version="0.4.0" , optional = true}
+arr_macro = "0.1.3"
+
+[features]
+
+tasks_8 = []
+tasks_16 = []
+tasks_32 = []
+
+resources_16 = []
+resources_32 = []
+resources_64 = []
+
+events_16 = ["timer"]
+events_32 = ["timer"]
+events_64 = ["timer"]
+
+timer = []
+
+system_logger = ["timer"]
+task_monitor = ["system_logger"]
+
+alloc = ["alloc-cortex-m"]
+
+default = []
+
+[lib]
+test = false
+bench = false
+
+
+[package.metadata.docs.rs]
+
+features = [ "events_64", "timer", "system_logger", "alloc", "task_monitor"]
+default-target = "thumbv7em-none-eabi"
+targets = ["thumbv7em-none-eabi"]
